@@ -102,7 +102,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.mod4"
+        applicationId "com.fredericomf.module6"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

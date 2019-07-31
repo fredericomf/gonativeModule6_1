@@ -1,6 +1,6 @@
-# gonativeModule4
+# gonativeModule6 (it's a copy of module 4)
 
-Module 4 of Rocketseat React Native Course
+Module 6 of Rocketseat React Native Course
 
 This work environment was prepared using the same tutorial of Module 1 and 2, reproduced below:
 
@@ -515,16 +515,89 @@ after
 ```bash
 react-native link react-native-vector-icons
 ```
+
 ## REACT NATIVE TRACK PLAYER
 
 ```bash
 yarn add react-native-track-player
 ```
+
 after
 
 ```bash
 react-native link react-native-track-player
 ```
 
-STUDY_NOTE: If you get an error while compiling the project, read about Breaking Changes of this library:https://github.com/react-native-kit/react-native-track-player/releases/tag/v1.2.0 
+STUDY_NOTE: If you get an error while compiling the project, read about Breaking Changes of this library:https://github.com/react-native-kit/react-native-track-player/releases/tag/v1.2.0
 Is possible to revert version of the library to an older version to try to compile again.
+
+# MODULE 6 ADJUSTMENTS
+
+## Changing application name
+
+Edit "string.xml" from "/android/app/src/mail/res/values"
+
+## Defining the app icon
+
+We can use a web tool for mobile app icons called ApeTools: [https://apetools.webprofusion.com]
+
+- Delete all "mipmap" folders from "android/app/src/main/res"
+- Extract all drawable from "Apetools" generated file to that folder
+- Edit AndroidManifest changing the following keys:
+
+```xml
+android:icon="@mipmap/ic_launcher"
+android:roundIcon="@mipmap/ic_launcher_round"
+```
+
+to
+
+```xml
+android:icon="@drawable/icon"
+android:roundIcon="@drawable/icon"
+```
+
+## Defining Splash Screen
+
+If your splash screen is just an icon centered with a solid background, follow the steps:
+
+- Create the colors.xml at "/android/app/src/mail/res/values"
+  Containing:
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+
+<resources>
+    <color name="primary">#000</color>
+</resources>
+```
+
+- Create the background_splash.xml at "/android/app/src/mail/res/drawable"
+  Containing:
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/primary" />
+    <item android:height="200dp" android:width="200dp" android:drawable="@drawable/icon" android:gravity="center" />
+</layer-list>
+```
+
+- Edit styles.xml duplicating "AppTheme" and renaming it to "SpashTheme" like this:
+
+```xml
+<style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+  <item name="android:windowBackground">@drawable/background_splash</item>
+</style>
+```
+
+- Edit AndroidManifest and add the android:theme value to activity tag:
+
+```xml
+  android:theme="@style/SplashTheme"
+```
+
+## Setting the application ID
+
+- Edit the file "android/app/build.gradle" and change "applicationId" value located in android > defaultConfig object
